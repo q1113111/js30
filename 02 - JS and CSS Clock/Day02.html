@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS + CSS Clock</title>
+</head>
+
+<body>
+
+
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand second-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand hour-hand"></div>
+        </div>
+    </div>
+
+
+    <style>
+        html {
+            background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+            background-size: cover;
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .clock {
+            width: 30rem;
+            height: 30rem;
+            border: 20px solid white;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow:
+                0 0 0 4px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 3px #EFEFEF,
+                inset 0 0 10px black,
+                0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+            /* account for the height of the clock hands */
+        }
+
+        .clock-face::before {
+            content: '';
+            display: block;
+            background-color: #fff;
+            width: 30px;
+            height: 30px;
+            left: 50%;
+            z-index: 1;
+            top: 50%;
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hand {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .second-hand::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            width: 5px;
+            height: 50%;
+            transform: translate(-50%, 0);
+            background-color: #f00;
+        }
+
+        .min-hand::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            width: 10px;
+            height: 40%;
+            transform: translate(-50%, 0);
+            background-color: #000;
+
+        }
+
+        .hour-hand::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            width: 15px;
+            height: 20%;
+            transform: translate(-50%, 0);
+            background-color: #000;
+
+        }
+    </style>
+
+    <script>
+        ; (function () {
+            const sec = document.querySelector('.second-hand');
+            const min = document.querySelector('.min-hand');
+            const hour = document.querySelector('.hour-hand');
+
+            function clock() {
+                let data = new Date();
+
+                let secDeg = data.getSeconds() * 6; //360 / 60
+                let minDeg = data.getMinutes() * 6 + data.getSeconds() * 6 / 60; // 360/60
+                let hourDeg = data.getHours() * 30 + data.getMinutes() * 30 / 60; // 360 / 6
+                sec.style.transform = `rotate(${secDeg}deg)`;
+                min.style.transform = `rotate(${minDeg}deg)`;
+                hour.style.transform = `rotate(${hourDeg}deg)`;
+
+            }
+            clock();
+            function aniantion() {
+                clock();
+                window.requestAnimationFrame(aniantion);
+            }
+
+            function timeOut() {
+                clock();
+                setTimeout(timeOut, 1000);
+            }
+
+            // setInterval(clock, 1000); 每一個間格 執行一次
+
+            // setTimeout(timeOut, 1000);  設定延遲 執行
+
+            window.requestAnimationFrame(aniantion); //處理畫面更新
+
+        })()
+
+    </script>
+</body>
+
+</html>
