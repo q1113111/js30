@@ -24,14 +24,14 @@
 
     <style>
         :root {
-            --padding: 10px;
+            --spacing: 10px;
             --blur: blur(10px);
             --base: #ffc600;
         }
 
         img {
-            padding: var(--padding);
-            filter: var(--blur);
+            padding: var(--spacing);
+            filter: blur(var(--blur));
             background: var(--base);
         }
 
@@ -50,7 +50,6 @@
             font-family: 'helvetica neue', sans-serif;
             font-weight: 100;
             font-size: 50px;
-            filter: blur();
         }
 
         .controls {
@@ -67,8 +66,10 @@
 
             function cssHandler() {
 
-
-
+                let dom = document.documentElement;
+                let data = this.dataset;
+                console.log(data.sizing);
+                dom.style.setProperty('--' + this.name, this.value + (data.sizing || ""));
 
 
 
@@ -85,7 +86,12 @@
                 //         img.style.background = this.value;
                 //         break;
                 // }
+                // document.querySelector('html') ; document.querySelector(':root') ; document.documentElement 一樣
+
+
             }
+
+
             let img = document.querySelector('img');
 
             let inputs = document.querySelectorAll('input');
