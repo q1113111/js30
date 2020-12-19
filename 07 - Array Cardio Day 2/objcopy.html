@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+   </head>
+
+   <body>
+      <script>
+         let obj1 = { count: 1 };
+         let obj2 = obj1;
+         let obj3 = Object.assign({}, obj1);
+         obj2.count = 5;
+         let obj4 = JSON.parse(JSON.stringify(obj1));
+         console.log(obj1.count, obj2.count, obj3.count, obj4.count);
+
+         let ary = [{ name: 'sam' }, { name: 'srar' }];
+         let ary1 = ary;
+         let ary2 = JSON.parse(JSON.stringify(ary));
+         console.log(ary[0] === ary2[0]);
+         let arr3 = ary.map((item) => {
+            return Object.assing({}, item);
+         });
+      </script>
+   </body>
+</html>

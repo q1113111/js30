@@ -49,6 +49,7 @@
 
       function displayMatches() {
          let matchArray = findMatches(this.value, cities);
+         console.log(matchArray);
          let html = matchArray
             .map((place) => {
                let regex = new RegExp(this.value, 'gi');

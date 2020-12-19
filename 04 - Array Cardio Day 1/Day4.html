@@ -109,11 +109,11 @@
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-    let ans = inventors.map(inventor => {
-      return `${inventor.first} ${inventor.last}`
-    });
+    // let ans = inventors.map(inventor => {
+    //   return `${inventor.first} ${inventor.last}`
+    // });
 
-    console.table(ans);
+    // console.table(ans);
     // console.table(ans);
 
     // Array.prototype.sort()
@@ -156,13 +156,13 @@
     // let ans = array.filter(title => title.indexOf('de') !== -1)
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    //  let ans =  people.sort((a,b)=>{
-    //       let [aFirst,aLast] = a.split(', ');
-    //       let [bFirst,bLast] = b.split(', ');
-
-    //       return aLast[0] > bLast[0] ? 1:bLast[0] >aFirst[0] ?-1:0;
-    //   });
-    //   console.table(ans);
+    let ans = people.sort((a, b) => {
+      let [aFirst, aLast] = a.split(', ');
+      let [bFirst, bLast] = b.split(', ');
+      console.log(a, b);
+      return aLast[0] > bLast[0] ? 1 : bLast[0] > aFirst[0] ? -1 : 0;
+    });
+    // console.table(ans);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car',
