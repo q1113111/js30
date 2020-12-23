@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    let console = {
+      isDev: true,
+      log(...args) {
+        if (!this.isDev) return;
+        window.console.log('%c住手', 'font-size:50px;color:#f00');
+        window.console.log(...args);
+      },
+      warn(...args) {
+        if (!this.isDev) return;
+        window.console.warn(...args);
+      },
+      error(...args) {
+        if (!this.isDev) return;
+        window.console.error(...args);
+      },
+      info(...args) {
+        if (!this.isDev) return;
+        window.console.info(...args);
+      },
+      assert(...args) {
+        if (!this.isDev) return;
+        window.console.assert(...args);
+      },
+      clear(...args) {
+        if (!this.isDev) return;
+        window.console.clear(...args);
+      },
+      dir(...args) {
+        if (!this.isDev) return;
+        window.console.dir(...args);
+      },
+      group(...args) {
+        if (!this.isDev) return;
+        window.console.group(...args);
+      },
+      groupEnd(...args) {
+        if (!this.isDev) return;
+        window.console.groupEnd(...args);
+      },
+      count(...args) {
+        if (!this.isDev) return;
+        window.console.count(...args);
+      },
+      time(...args) {
+        if (!this.isDev) return;
+        window.console.time(...args);
+      },
+      timeEnd(...args) {
+        if (!this.isDev) return;
+        window.console.timeEnd(...args);
+      }
+    }
+    // Regular
+    console.log('aa', 'bb');
+    // Interpolated
+    console.log('Hello I am a %s string!', '💩');
+    // Styled
+
+    // warning!
+    console.warn("notice")
+    // Error :|
+    console.error("error");
+    // Info
+    console.info("hello");
+    // Testing
+    console.assert('', '訊息');
+
+    // clearing
+    console.clear();
+    // Viewing DOM Elements
+    let p = document.querySelector('p');
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);
+      console.log(`this is dog ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} year`);
+      console.log(`${dog.name} is ${dog.age * 7}`);
+      console.groupEnd(`${dog.name}`);
+    })
+    // counting
+    console.count('aa');
+    console.count('bb');
+    console.count('cc');
+    console.count('aa');
+    console.count('aa');
+    console.count('aa');
+    // timing
+
+    console.time('sss');
+    for (let i = 0; i < 1000000; i++) {
+      let j = i;
+    }
+    console.timeEnd('sss');
+  </script>
+</body>
+
+</html>
