@@ -1,56 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Reference VS Copy</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Reference VS Copy</title>
+  </head>
+  <body>
+    <script>
+      // start with strings, numbers and booleans
 
-  <script>
-    // start with strings, numbers and booleans
+      // Let's say we have an array
+      const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+      let player2 = players;
 
-    // and we want to make a copy of it.
+      // and we want to make a copy of it.
+      player2 = [].concat(players);
+      player2[0] = 'sam';
+      console.log(player2, players);
+      let player3 = players.slice();
+      player3[0] = 'sams';
+      console.log(player3, players);
+      let player4 = [...players];
+      player4[0] = 'samss';
+      console.log(player4, players);
+      // You might think we can just do something like this:
 
-    // You might think we can just do something like this:
+      // however what happens when we update that array?
 
-    // however what happens when we update that array?
+      // now here is the problem!
 
-    // now here is the problem!
+      // oh no - we have edited the original array too!
 
-    // oh no - we have edited the original array too!
+      // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
-    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+      // So, how do we fix this? We take a copy instead!
 
-    // So, how do we fix this? We take a copy instead!
+      // one way
 
-    // one way
+      // or create a new array and concat the old one in
 
-    // or create a new array and concat the old one in
+      // or use the new ES6 Spread
 
-    // or use the new ES6 Spread
+      // now when we update it, the original one isn't changed
 
-    // now when we update it, the original one isn't changed
+      // The same thing goes for objects, let's say we have a person object
 
-    // The same thing goes for objects, let's say we have a person object
+      // with Objects
+      const person = {
+        name: 'Wes Bos',
+        age: 80,
+      };
+      const s = {
+        name: 'Wes Bos',
+        age: 80,
+      };
+      const sb = {
+        name: 'sam',
+      };
+      let aa = Object.assign(s, sb);
+      console.log(aa);
+      // and think we make a copy:
+      let person2 = Object.assign({}, person);
+      person2 = {
+        name: 'Sam',
+        age: 85,
+      };
+      console.log(person, person2);
+      // how do we take a copy instead?
+      const wes = {
+        name: 'Wes',
+        age: 100,
+        social: {
+          twitter: '@wesbos',
+          facebook: 'wesbos.developer',
+        },
+      };
+      let dev = Object.assign({}, wes);
 
-    // with Objects
-    const person = {
-      name: 'Wes Bos',
-      age: 80
-    };
+      // We will hopefully soon see the object ...spread
+      // wes facebook會被改變
+      dev.social.facebook = 'aa';
 
-    // and think we make a copy:
+      //wes social 不會被改變
+      dev.social = null;
+      console.log(dev, wes);
+      // 深複製 但json不能複製函數
+      // let dev2 = JSON.parse(JSON.stringify(wes));
+      // dev2.social.facebook = 'bb';
+      // dev2.social = null;
+      // // 不會被改變
+      // console.log(dev2, wes);
 
-    // how do we take a copy instead?
+      // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
 
-    // We will hopefully soon see the object ...spread
+      //陣列抓key
 
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
-  </script>
-
-</body>
+      let ary = [{ a: 1 }, { b: 2 }, { c: 3 }];
+      ary.forEach((item) => {
+        for (let key in item) {
+          console.log(key, item[key]);
+        }
+      });
+    </script>
+  </body>
 </html>
