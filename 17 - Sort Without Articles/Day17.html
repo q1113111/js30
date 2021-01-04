@@ -61,14 +61,14 @@
       ];
 
       function strip(bandName) {
-        return bandName.replace(/^(a |the |an )/i, '').trim();
+        return bandName.replace(/^( the| a |an )/i, '').trim();
       }
-
-      const sortedBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1)); //操作原始的
-      // const sortedBands = [...bands].sort((a, b) => strip(a) > strip(b) ? 1 : -1); 複製新的
-      document.querySelector('#bands').innerHTML = sortedBands.map((band) => `<li>${band}</li>`).join('');
-
-      console.log(sortedBands);
+      const sortBands = bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
+      document.querySelector('#bands').innerHTML = sortBands
+        .map((band) => {
+          return `<li>${band}</li>`;
+        })
+        .join('');
     </script>
   </body>
 </html>
