@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 const strip = document.querySelector('.strip');
 const snap = document.querySelector('.snap');
 
+let type = 2;
+
 function getVideo() {
   navigator.mediaDevices
     .getUserMedia({ video: true, audio: false })
@@ -31,14 +33,31 @@ function paintToCanvas() {
   canvas.width = width;
   canvas.height = height;
   // Alex自己家的
-  // let pixels = ctx.getImageData(0,0,width,height);
-  // console.log(`Aera: ${width*height},Pixels: ${pixels.data.length}`);
+  let pixels = ctx.getImageData(0, 0, width, height);
+  console.log(`Aera: ${width * height},Pixels: ${pixels.data.length}`);
+
+  // pixels.data[0] [1] [2] [3] 第一個點的rgba值
   return setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
     // take the pixels out
     let pixels = ctx.getImageData(0, 0, width, height);
     // mess with them
     // pixels = redEffect(pixels);
+
+    // Alex自己家的
+    switch (type) {
+      case 1:
+        pixels = redEffect(pixels);
+        紅色特效;
+        break;
+      case 2:
+        pixels = rgbSplit(pixels);
+        位移;
+        breakl;
+      case 3:
+        pixels = greenScreen(pixels);
+        break;
+    }
 
     pixels = rgbSplit(pixels);
     // ctx.globalAlpha = 0.8;
@@ -64,6 +83,7 @@ function takePhoto() {
 }
 
 function redEffect(pixels) {
+  // pixels.data[0+4] [1+4] [2+4] [3+4] 第X個點的rgba值
   for (let i = 0; i < pixels.data.length; i += 4) {
     pixels.data[i + 0] = pixels.data[i + 0] + 200; // RED
     pixels.data[i + 1] = pixels.data[i + 1] - 50; // GREEN
