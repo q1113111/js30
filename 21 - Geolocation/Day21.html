@@ -97,17 +97,18 @@
     <script>
       const arrow = document.querySelector('.arrow');
       const speed = document.querySelector('.speed-value');
-      // watchPosition 持續開啟監聽 getCurrentPosition 只拿第一次
+
       if ('geolocation' in navigator) {
+        // watchPosition 持續開啟監聽 getCurrentPosition 只拿第一次
         let watchID = navigator.geolocation.watchPosition(
           (data) => {
-            // navigator.geolocation.watchPosition((data) => {
             console.log(data);
             speed.textContent = data.coords.speed;
-            arrow.style.transform = `rotate(${data.coords.heading}deg)`; //hedaing 方位 方向
+            arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+            //hedaing 方位 方向
           },
           (err) => {
-            console.error(err);
+            console.log(err);
             navigator.geolocation.clearWatch(watchID);
           }
         );
