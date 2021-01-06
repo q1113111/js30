@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <span class="highlight"></span>
     <nav>
+      <!-- <span class="highlight"></span> menu選單 放裡面 -->
       <ul class="menu">
         <li><a href="">Home</a></li>
         <li><a href="">Order Status</a></li>
@@ -40,7 +42,31 @@
     </div>
 
     <script>
-      // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+      (function () {
+        let targets = document.querySelectorAll('a');
+        let highlight = document.querySelector('.highlight');
+        let now = null;
+        function setposition() {
+          if (!now) return;
+          let { top, left, width, height } = now.getBoundingClientRect();
+          console.log(now.getBoundingClientRect());
+          //單純做區域 menu選單就用offset
+          // highlight.style.left = this.offsetLeft + 'px';
+          // highlight.style.top = this.offsetTop + 'px';
+          highlight.style.width = width + 'px';
+          highlight.style.height = height + 'px';
+          highlight.style.left = left + scrollX + 'px';
+          highlight.style.top = top + scrollY + 'px';
+        }
+        function targetHandler() {
+          now = this;
+          setposition();
+        }
+        targets.forEach((target) => {
+          target.addEventListener('mouseenter', targetHandler);
+        });
+        window.addEventListener('resize', setposition);
+      })();
     </script>
   </body>
 </html>
