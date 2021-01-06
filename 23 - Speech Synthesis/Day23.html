@@ -33,17 +33,17 @@
       const speakButton = document.querySelector('#speak');
       const stopButton = document.querySelector('#stop');
       msg.text = document.querySelector('[name="text"]').value;
-
       function populateVoices() {
         voices = this.getVoices();
         voicesDropdown.innerHTML = voices
-          .filter((voice) => voice.lang.includes('en'))
-          .map((voice) => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+          .filter((voice) => voice.lang.includes('zh-TW'))
+          .map((voice) => `<option value="${voice.name}">${voice.name}(${voice.lang})</option>`)
           .join('');
       }
 
       function setVoice() {
         msg.voice = voices.find((voice) => voice.name === this.value);
+
         toggle();
       }
 
