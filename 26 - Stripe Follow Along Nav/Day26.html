@@ -235,6 +235,7 @@
         let dropdownBg = document.querySelector('.dropdownBackground');
         function inHandler() {
           this.classList.add('trigger-enter');
+          console.log(this.classList.contains('trigger-enter'));
           setTimeout(() => {
             this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active');
           }, 100);

@@ -34,6 +34,28 @@
       <div class="item item25">25</div>
     </div>
 
-    <script></script>
+    <script>
+      let items = document.querySelector('.items');
+      let startX = 0;
+      function start(e) {
+        items.classList.add('active');
+        startX = e.pageX;
+      }
+      function moveHandler(e) {
+        if (items.classList.contains('active')) {
+          let move = e.pageX - startX;
+          startX = e.pageX;
+
+          this.scrollLeft -= move;
+        }
+      }
+      function outHandler() {
+        items.classList.remove('active');
+      }
+      items.addEventListener('mousedown', start);
+      items.addEventListener('mousemove', moveHandler);
+      items.addEventListener('mouseup', outHandler);
+      items.addEventListener('mouseleave', outHandler);
+    </script>
   </body>
 </html>
