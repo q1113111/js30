@@ -66,11 +66,7 @@
         scroe = sec;
         scoreBoard.textContent = scroe;
       }
-      function getMoleRandom() {
-        const mole = Math.floor(Math.random() * moles.length);
-        const time = Math.random() * (1500 - 1000) + 1000;
-        console.log(mole, time);
-        if (molesProxy[mole]) return getMoleRandom();
+      function setmole(mole, time) {
         molesProxy[mole] = true;
         setTimeout(() => {
           molesProxy[mole] = false;
@@ -78,6 +74,13 @@
         setTimeout(() => {
           if (!timeup) getMoleRandom();
         }, time / 2);
+      }
+      function getMoleRandom() {
+        const mole = Math.floor(Math.random() * moles.length);
+        const time = Math.random() * (1500 - 1000) + 1000;
+        console.log(mole, time);
+        if (molesProxy[mole]) return getMoleRandom();
+        setmole(mole, time);
       }
       function startGame() {
         secScore(0);
